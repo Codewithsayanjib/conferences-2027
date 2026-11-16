@@ -5,17 +5,17 @@
 /* Layout: a call-for-papers board; filter bar on top, deadline-sorted rows with a date stub */
 :root{
   --bg:#f6f7f9;--surface:#ffffff;--fg:#1b2330;--muted:#5d6878;--line:#dfe3ea;
-  --accent:#2b5c9e;--ieee:#2b5c9e;--spr:#b4572a;--tbc:#6b6f7a;--ok:#1f7a4d;--warn:#9a6a00;
+  --accent:#2b5c9e;--ieee:#2b5c9e;--spr:#b4572a;--prem:#6a3fa0;--tbc:#6b6f7a;--ok:#1f7a4d;--warn:#9a6a00;
   --ok-bg:#e4f3ea;--warn-bg:#fbf1d9;--chip:#eef1f6;
   --display:"Fraunces",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#12161d;--surface:#1a2029;--fg:#e4e8ef;--muted:#99a3b3;--line:#2c3440;
-  --accent:#7fa8e0;--ieee:#7fa8e0;--spr:#e39a72;--tbc:#a3a8b3;--ok:#6fcf9a;--warn:#e6bd5c;
+  --accent:#7fa8e0;--ieee:#7fa8e0;--spr:#e39a72;--prem:#b79ae6;--tbc:#a3a8b3;--ok:#6fcf9a;--warn:#e6bd5c;
   --ok-bg:#1b3328;--warn-bg:#3a2f14;--chip:#232b36;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#12161d;--surface:#1a2029;--fg:#e4e8ef;--muted:#99a3b3;--line:#2c3440;
-  --accent:#7fa8e0;--ieee:#7fa8e0;--spr:#e39a72;--tbc:#a3a8b3;--ok:#6fcf9a;--warn:#e6bd5c;
+  --accent:#7fa8e0;--ieee:#7fa8e0;--spr:#e39a72;--prem:#b79ae6;--tbc:#a3a8b3;--ok:#6fcf9a;--warn:#e6bd5c;
   --ok-bg:#1b3328;--warn-bg:#3a2f14;--chip:#232b36;color-scheme:dark}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
 .wrap{max-width:1100px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -52,22 +52,23 @@ a{color:var(--accent)}
 <div class="wrap">
   <h1>CS/AI Conferences, Jan–Aug 2027 Deadlines</h1>
   <p class="lede">India-based IEEE and Springer venues for AI, ML, DL, CV and NLP whose full-paper submission deadline falls between 1 January and 31 August 2027. Sorted by deadline. Hybrid venues are marked green. Data last checked: __CHECKED__; always confirm on the official site before submitting.</p>
-  <div class="dl" aria-label="Downloads"><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027.xlsx">Excel (all sheets) ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_ieee.csv">IEEE CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_springer.csv">Springer CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_publisher_tbc.csv">Publisher TBC CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_watchlist.csv">Watchlist CSV ↓</a></div>
+  <div class="dl" aria-label="Downloads"><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027.xlsx">Excel (all sheets) ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_ieee.csv">IEEE CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_springer.csv">Springer CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_premier.csv">Premier CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_publisher_tbc.csv">Publisher TBC CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_watchlist.csv">Watchlist CSV ↓</a></div>
   <div class="filters" role="group" aria-label="Filter">
     <button id="f-all" data-f="all" aria-pressed="true">All in window</button>
     <button id="f-ieee" data-f="IEEE" aria-pressed="false">IEEE</button>
     <button id="f-spr" data-f="Springer" aria-pressed="false">Springer</button>
+    <button id="f-prem" data-f="Premier" aria-pressed="false">Premier</button>
     <button id="f-tbc" data-f="Publisher TBC" aria-pressed="false">Publisher TBC</button>
     <button id="f-hyb" data-f="hybrid" aria-pressed="false">Hybrid only</button>
     <button id="f-watch" data-f="Watchlist" aria-pressed="false">Watchlist</button>
   </div>
   <div class="count" id="count"></div>
   <div class="list" id="list"></div>
-  <p class="legend"><b>Watchlist</b> holds strong venues whose deadline sits just outside the window or isn't published yet; extensions often pull them in. <b>Publisher TBC</b> means the 2027 publisher isn't confirmed. "LNNS approval pending" is normal for SCRS events months ahead.</p>
+  <p class="legend"><b>Premier</b> lists the more selective India venues (CVMI, CVIP, PReMI, INDICON, ICCCNT); several have no 2027 call yet, so their deadlines are expectations from the last cycle. <b>Watchlist</b> holds strong venues whose deadline sits just outside the window or isn't published yet; extensions often pull them in. <b>Publisher TBC</b> means the 2027 publisher isn't confirmed. "LNNS approval pending" is normal for SCRS events months ahead.</p>
 </div>
 <script>
 const DATA = __DATA__;
-const COLOR={IEEE:"var(--ieee)",Springer:"var(--spr)","Publisher TBC":"var(--tbc)",Watchlist:"var(--tbc)"};
+const COLOR={IEEE:"var(--ieee)",Springer:"var(--spr)","Publisher TBC":"var(--tbc)",Premier:"var(--prem)",Watchlist:"var(--tbc)"};
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let filter="all";
