@@ -1,0 +1,160 @@
+"""Builds conferences_2027.xlsx, CSVs and data.json from the CONFS list below.
+Edit the list, then run: python3 build.py"""
+import csv, json
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.utils import get_column_letter
+
+CHECKED = "2026-11-16"
+COLS = ["Group", "Acronym", "Full name", "Edition", "Publisher / series", "Indexing",
+        "Location", "Region", "Conference dates", "Submission deadline", "Deadline status",
+        "Notification", "Camera-ready", "Mode", "Topic area", "Page limit",
+        "Reg. fee (approx.)", "Website", "Checked on", "Notes"]
+
+def c(group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr, mode, topic, pages, fee, url, notes):
+    return dict(zip(COLS, [group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr,
+                           mode, topic, pages, fee, url, CHECKED, notes]))
+
+CONFS = [
+    # ---------- IEEE ----------
+    c("IEEE", "ICETICS 2027", "Intl. Conf. on Emerging Trends in Information, Communication & Systems", "2nd",
+      "IEEE (record #74017; tech. sponsor: IEEE MP Section)", "IEEE Xplore (expected)", "Bhopal, MP", "Central",
+      "23–24 Jul 2027", "2027-01-10", "Confirmed", "From 15 Mar 2027", "30 Apr 2027", "Hybrid",
+      "AI, data science, intelligent systems track", "6 pages, IEEE 2-col", "Not listed",
+      "https://bgibhopal.com/icetics-2027/", "Host: Bansal Institute of Science & Technology. Best fit in IEEE list. IEEE record #74017 and hybrid mode shown on official site (16 Nov 2026); the dates sub-page could not be re-opened this run, so the deadline is carried over from the earlier check."),
+    c("IEEE", "ICCCA 2027", "IEEE Intl. Conf. on Computing, Communication and Automation", "8th",
+      "IEEE (record #72457; IEEE UP Section & IAS sponsored)", "IEEE Xplore (expected)", "Greater Noida, UP", "North",
+      "10–12 Apr 2027", "2027-02-15", "Confirmed", "10 Mar 2027", "15 Mar 2027", "Hybrid",
+      "Computing, AI, communication", "6 pages, IEEE 2-col (+2 extra pages at ₹1000/page)",
+      "₹10,620 non-IEEE / ₹9,500 IEEE member (early bird to 15 Mar 2027, incl. GST); student author ₹8,260 / ₹7,080",
+      "https://www.iccca.co.in/", "Galgotias University. Only 20% of presentations online, so an online slot is not guaranteed."),
+    c("IEEE", "ICCMC 2027", "Intl. Conf. on Computing Methodologies and Communication", "10th",
+      "IEEE (past editions in Xplore)", "IEEE Xplore (2027 unconfirmed)", "Erode, TN", "South",
+      "21–23 Jun 2027", "2027-03-29", "Confirmed", "26 Apr 2027", "Not listed (reg. by 24 May 2027)", "Unconfirmed",
+      "Computing, AI/ML, communication", "Not listed", "Not listed (site: \"to be updated\")",
+      "https://icocmc.com/2027/", "Surya Engineering College. Site still shows no 2027 IEEE record number; confirm before submitting."),
+    c("IEEE", "AIC 2027", "IEEE World Conf. on Applied Intelligence and Computing", "6th",
+      "IEEE (proceedings \"will be submitted for inclusion to IEEE Xplore\"; no record no. shown)", "IEEE Xplore (expected)", "SRIT, Jabalpur, MP", "Central",
+      "26–27 Jun 2027", "2027-04-17", "Confirmed", "27 May 2027", "Not listed (reg. by 11 Jun 2027)", "Unconfirmed",
+      "Applied AI, computing", "Not listed", "Not listed (fee page returned a server error)",
+      "https://www.scrs.in/conference/aic2027", "SCRS index and conference page now agree on 26–27 Jun 2027 (earlier date conflict resolved)."),
+    # ---------- Springer ----------
+    c("Springer", "PEIS 2027", "Intl. Conf. on Power Engineering and Intelligent Systems", "5th",
+      "Springer LNEE (\"accepted papers will be submitted to\")", "Scopus", "NIT Uttarakhand", "North",
+      "13–14 Mar 2027", "2027-01-02", "Confirmed", "11 Feb 2027", "Not listed (reg. by 26 Feb 2027)", "Hybrid",
+      "Intelligent systems, power + AI", "Not listed", "Not listed",
+      "https://scrs.in/conference/peis2027", "SCRS-organized. Leans power engineering; AI papers fit the intelligent-systems track."),
+    c("Springer", "BIDA 2027", "Intl. Conf. on Business Intelligence & Data Analytics", "4th",
+      "Springer \"Studies in Autonomic, Data-driven and Industrial Computing\" (approval pending)", "Scopus (if approved)", "RVIM, Bengaluru, KA", "South",
+      "10–11 Apr 2027", "2027-01-30", "Confirmed", "11 Mar 2027", "Not listed (reg. by 26 Mar 2027)", "Hybrid",
+      "Data analytics, business intelligence, applied ML", "Not listed", "Not listed",
+      "https://scrs.in/conference/bida2027", "NEW 16 Nov 2026. SCRS-organized; management-school host, so it suits applied analytics/ML papers more than core DL/CV."),
+    c("Springer", "CVR 2027", "Intl. Conf. on Computer Vision and Robotics", "7th",
+      "Springer LNNS (approval pending)", "Scopus", "NIT Goa", "West",
+      "24–25 Apr 2027", "2027-02-13", "Confirmed", "25 Mar 2027", "Not listed (reg. by 9 Apr 2027)", "Hybrid",
+      "Computer vision, robotics, DL", "Not listed", "₹9,000 + 18% GST (₹8,000 SCRS/NIT Goa members)",
+      "https://scrs.in/conference/cvr2027", "SCRS-organized. Best CV fit. Offline sessions on Day 1 only; fee covers online or offline presentation."),
+    c("Springer", "CIMA 2027", "Congress on Intelligent Machines and Algorithms", "3rd",
+      "Springer LNNS (approval pending)", "Scopus", "NIT Puducherry", "South",
+      "22–23 May 2027", "2027-03-13", "Confirmed", "Not listed", "Not listed", "Hybrid",
+      "Computer vision, AI in healthcare, robotics, IoT, intelligent systems", "12 pages Springer format before extra-page charges (₹500/page)",
+      "₹9,000 + 18% GST (₹8,000 SCRS/NIT Puducherry members)",
+      "https://scrs.in/conference/cima2027", "Replaces the earlier \"CVR 2027 (Puducherry)\" row: the SCRS index entry at NIT Puducherry with a 13 Mar deadline is CIMA, not a second CVR."),
+    c("Springer", "ICIVC 2027", "Intl. Conf. on Intelligent Vision and Computing", "7th",
+      "Springer LNNS (approval pending)", "Scopus", "ICFAI University, Dehradun, UK", "North",
+      "11–12 Jun 2027", "2027-04-02", "Confirmed", "12 May 2027", "Not listed (reg. by 27 May 2027)", "Hybrid",
+      "Computer vision, intelligent computing, DL", "Not listed", "₹9,000 + 18% GST (₹8,000 SCRS/ICFAI members)",
+      "https://scrs.in/conference/icivc2027", "NEW 16 Nov 2026. SCRS-organized; strong CV fit. Offline sessions on Day 1 only."),
+    c("Springer", "ICDWCI 2027", "Intl. Conf. on Distributed Wireless Communication and IoT", "3rd",
+      "Springer (planned, IoT & Wireless Comm. Networks series)", "Not confirmed", "Cauvery Inst. of Technology, Mandya, KA", "South",
+      "28–29 May 2027", "2027-04-15", "Confirmed", "30 Apr 2027", "Not listed (reg. by 15 May 2027)", "Unconfirmed",
+      "Wireless, IoT; AI/ML/data mining listed as allied areas", "Not listed", "Not listed", "https://icdwci.co.in/",
+      "Full name corrected from the official site (wireless/IoT focus, weaker AI fit). Springer publication only planned so far."),
+    c("Springer", "ICDSA 2027", "Intl. Conf. on Data Science and Applications", "8th",
+      "Springer LNNS (approval pending)", "Scopus", "VIT Mauritius (+ online)", "Outside India",
+      "7–8 Aug 2027", "2027-05-29", "Confirmed", "8 Jul 2027", "Not listed (reg. by 23 Jul 2027)", "Hybrid",
+      "Data science, ML, DL", "Not listed", "Not listed",
+      "https://scrs.in/conference/icdsa2027", "Dates moved on the official site: conference 7–8 Aug 2027 (was 11–12 Jul), deadline 29 May 2027 (was 2 May). Host is in Mauritius, but online presentation lets you attend from India."),
+    # ---------- Publisher to confirm ----------
+    c("Publisher TBC", "ICAN 2027", "Intl. Conf. on AI-driven Computing, Analytics and Networks", "7th",
+      "Not announced (\"Scopus-indexed conference proceedings\"; publication partner \"to be updated soon\")", "Scopus (per site)", "Chitkara Univ., Chandigarh/Rajpura, PB", "North",
+      "16–17 Jul 2027", "2027-03-15", "Confirmed", "15 May 2027", "Not listed (reg. by 11 Jun 2027)", "In-person for India-affiliated authors (virtual only for authors outside India)",
+      "AI, analytics, networks", "4,000–6,000 words, format-free initial submission", "Not listed",
+      "https://www.chitkara.edu.in/cse-can/", "Strong topic fit and dates now confirmed on the official site, but Indian authors must present physically. Submissions open 10 Jan 2027."),
+    c("Publisher TBC", "ICETCI 2027", "Intl. Conf. on Emerging Technologies and Computing Innovations", "3rd",
+      "Springer proposal submitted (2025 and 2026 proceedings published with Springer)", "Not confirmed", "Mumbai, MH", "West",
+      "20–21 Feb 2027", "2027-01-10", "Confirmed", "20 Jan 2027", "Not listed", "Hybrid",
+      "Computing, emerging tech", "Not listed", "₹11,000 student/scholar; ₹12,000 faculty; ₹13,000 industry",
+      "https://www.icetci.in/", "Organized by MG Aricent Educational Foundation (Nashik). Site states publication and indexing are not guaranteed; check publisher carefully."),
+    # ---------- Watchlist (outside window) ----------
+    c("Watchlist", "NEXAI 2027", "Next-Generation AI & Agentic Intelligence", "—",
+      "Springer LNNS", "Scopus", "NorthCap Univ., Gurugram, HR", "North",
+      "4–5 Mar 2027", "2026-11-22", "Outside window", "1 Jan 2027 (rolling)", "25 Jan 2027", "Hybrid",
+      "AI, agentic AI, GenAI/LLMs, NLP", "", "", "https://nexai2027.ncuindia.edu/",
+      "Deadline now published: 22 Nov 2026, before the window. Watch for an extension into January."),
+    c("Watchlist", "ICCCT 2027", "Intl. Conf. on Communication & Computational Technologies", "9th",
+      "Springer LNNS (approval pending)", "Scopus", "NFSU Goa Campus", "West",
+      "30–31 Jan 2027", "2026-11-21", "Outside window", "", "", "Hybrid",
+      "Communication, computational technologies", "", "", "https://scrs.in/conference/iccct2027",
+      "NEW 16 Nov 2026 (watch only). Deadline from the SCRS conference index; before window."),
+    c("Watchlist", "ICRCICN 2027", "IEEE Intl. Conf. on Research in Computational Intelligence and Comm. Networks", "8th",
+      "IEEE (record #73691; IEEE Kolkata Section tech. co-sponsor)", "IEEE Xplore", "Kalyani, WB", "East",
+      "27–28 Feb 2027", "2026-11-30", "Outside window", "1 Feb 2027", "14 Feb 2027", "Hybrid",
+      "Computational intelligence, networks", "", "", "https://icrcicn.in/", "Deadline before window, no extension announced as of 16 Nov 2026; extensions common."),
+    c("Watchlist", "SANKALP 2027", "SANKALP 2027 (ABV-IIITM Gwalior IEEE conference)", "—",
+      "IEEE (per search listing)", "Not verified", "ABV-IIITM, Gwalior, MP", "Central",
+      "9–11 Apr 2027", "2026-11-30", "Outside window", "", "15 Feb 2027", "Unconfirmed",
+      "Computing, AI", "", "", "https://sankalp.iiitm.ac.in/",
+      "NEW 16 Nov 2026 (watch only). Official site would not load (expired TLS certificate); dates come from a search-result snippet of that site and are unverified."),
+    c("Watchlist", "INDIACom 2027", "Intl. Conf. on Computing for Sustainable Global Development", "21st INDIACom / 14th intl.",
+      "IEEE (Conference ID 74162; Delhi Section tech. approved)", "IEEE Xplore, Scopus", "New Delhi", "North",
+      "7–9 Apr 2027", "2026-12-07", "Outside window", "8 Feb 2027", "22 Feb 2027", "Hybrid-friendly",
+      "Computing, AI", "", "", "https://bvicam.ac.in/indiacom/", "Deadline before window, no extension announced as of 16 Nov 2026; watch for one."),
+    c("Watchlist", "IEM-ICDC 2027", "Intl. Conf. on Computational Intelligence, Data Science and Cloud Computing", "5th",
+      "Springer format (series not stated)", "Not verified", "IEM, Kolkata, WB", "East",
+      "17–19 Mar 2027", "2026-12-10", "Outside window", "", "", "Unconfirmed",
+      "Computational intelligence, data science", "Minimum 10 pages, Springer format", "", "https://www.iemicdc.org/",
+      "NEW 16 Nov 2026 (watch only). Source: EasyChair CFP page, not the conference site."),
+    c("Watchlist", "CONECCT 2027", "IEEE Intl. Conf. on Electronics, Computing and Communication Technologies", "13th",
+      "IEEE (Bangalore Section)", "IEEE Xplore", "Bengaluru, KA", "South",
+      "29–31 Jul 2027", "2026-12-15", "Outside window", "15 Feb 2027", "", "Unconfirmed",
+      "18 tracks in 7 focus areas; AI/ML embedded in tracks, not a headline track", "", "",
+      "https://ieee-conecct.org/", "CORRECTED 16 Nov 2026: official site gives 15 Dec 2026 as the paper deadline; 15 Feb 2027 is the acceptance notification, not the deadline. Moved from IEEE to Watchlist."),
+    c("Watchlist", "IIPS-CoMET 2027", "IEEE Intl. Conf. on Modern AI, Entrepreneurship & Technology", "—",
+      "IEEE (record #73825)", "IEEE Xplore (expected)", "IIPS, DAVV, Indore, MP", "Central",
+      "19–20 Mar 2027", "2026-12-21", "Outside window", "", "", "Hybrid",
+      "Human-centric AI, AI in business", "", "", "https://iips.edu.in/comet27/",
+      "NEW 16 Nov 2026 (watch only). Deadline 10 days before the window; an extension would bring it in."),
+    c("Watchlist", "ISC 2027", "Intl. Conf. on Intelligent Systems and Computing (SCRS)", "—",
+      "Not stated on conference page", "Not confirmed", "SVVV, Indore, MP (SCRS index says \"Australia\")", "Central",
+      "11–12 Sep 2027", "2027-07-03", "Outside window", "12 Aug 2027", "Not listed (reg. by 27 Aug 2027)", "Unconfirmed",
+      "Intelligent systems, AI/ML", "", "", "https://scrs.in/conference/isc2027",
+      "MOVED 16 Nov 2026: rescheduled from 15–16 May to 11–12 Sep 2027; deadline now 3 Jul 2027 (after the window). Venue conflict between the conference page (SVVV) and the SCRS index (Australia)."),
+]
+
+wb = Workbook(); wb.remove(wb.active)
+sheets = {"IEEE": "IEEE", "Springer": "Springer", "Publisher TBC": "Publisher TBC",
+          "Hybrid only": None, "Watchlist": "Watchlist"}
+for title, grp in sheets.items():
+    ws = wb.create_sheet(title)
+    rows = [r for r in CONFS if (r["Group"] == grp if grp else r["Mode"] == "Hybrid" and r["Group"] != "Watchlist")]
+    rows.sort(key=lambda r: r["Submission deadline"])
+    ws.append(COLS)
+    for r in rows:
+        ws.append([r[k] for k in COLS])
+    for cell in ws[1]:
+        cell.font = Font(bold=True, color="FFFFFF"); cell.fill = PatternFill("solid", fgColor="1F3A5F")
+    for i, k in enumerate(COLS, 1):
+        ws.column_dimensions[get_column_letter(i)].width = 40 if k in ("Full name", "Notes", "Website") else 18
+    for row in ws.iter_rows(min_row=2):
+        for cell in row:
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+    ws.freeze_panes = "C2"
+    if grp:
+        with open(f"conferences_2027_{title.replace(' ', '_').lower()}.csv", "w", newline="") as f:
+            w = csv.DictWriter(f, COLS); w.writeheader(); w.writerows(rows)
+wb.save("conferences_2027.xlsx")
+json.dump(CONFS, open("data.json", "w"), indent=1, ensure_ascii=False)
+print(len(CONFS), "rows written")
+html = open("template.html").read().replace("__DATA__", json.dumps(CONFS, ensure_ascii=False)).replace("__CHECKED__", CHECKED)
+open("conferences_2027.html", "w").write(html)
