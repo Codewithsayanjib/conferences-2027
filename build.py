@@ -9,12 +9,15 @@ CHECKED = "2026-11-17"
 COLS = ["Group", "Acronym", "Full name", "Edition", "Publisher / series", "Indexing",
         "Location", "Region", "Conference dates", "Submission deadline", "Deadline status",
         "Notification", "Camera-ready", "Mode", "Topic area", "Page limit",
-        "Reg. fee (approx.)", "Fee: student", "Fee: non-IEEE / regular", "Fee: online/hybrid", "Website", "Checked on", "Notes"]
+        "Reg. fee (approx.)", "Fee: student", "Fee: non-IEEE / regular", "Fee: online/hybrid", "Website", "Checked on", "Notes",
+        "Verification", "Track record", "Acceptance signals", "Fit score"]
 
 def c(group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr, mode, topic, pages, fee, url, notes,
-      fee_student="Not listed", fee_regular="Not listed", fee_online="Not listed"):
+      fee_student="Not listed", fee_regular="Not listed", fee_online="Not listed",
+      verification="Listing site", track="Not checked", accept="Not published"):
     return dict(zip(COLS, [group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr,
-                           mode, topic, pages, fee, fee_student, fee_regular, fee_online, url, CHECKED, notes]))
+                           mode, topic, pages, fee, fee_student, fee_regular, fee_online, url, CHECKED, notes,
+                           verification, track, accept, 0]))
 
 CONFS = [
     # ---------- IEEE ----------
@@ -253,6 +256,21 @@ CONFS = [
       "IEEE", "IEEE Xplore", "Sohra, Meghalaya", "North-East",
       "16–18 Jun 2027", "2026-12-15", "Outside window", "", "", "Unconfirmed",
       "EE/CS tracks incl. AI", "", "", "https://gcon2027.in/", "Deadline 15 Dec 2026, before the window."),
+    c("IEEE", "ICARC 2027", "Intl. Conf. on Advanced Research in Computing", "7th",
+      "IEEE (tech. co-sponsor: IEEE Sri Lanka Section)", "IEEE Xplore", "Sabaragamuwa Univ., Sri Lanka", "Outside India (hybrid)",
+      "16–17 Feb 2027", "2027-01-06", "Confirmed", "21 Jan 2027", "21 Jan 2027", "Hybrid",
+      "Computing broadly, incl. AI/ML", "Not listed", "Not listed",
+      "https://www.icarc.lk/", "Outside India but hybrid. Short gap between notification and camera-ready."),
+    c("Watchlist", "IntelliSys 2027", "Intelligent Systems Conference (SAI)", "13th",
+      "Springer LNNS", "Scopus", "Amsterdam (virtual option)", "Outside India (hybrid)",
+      "2–3 Sep 2027", "2026-12-01", "Outside window", "1 Jan 2027", "15 Jan 2027", "Hybrid",
+      "AI, intelligent systems", "", "", "https://saiconference.com/IntelliSys",
+      "Round 2 deadline 1 Dec 2026, before the window. Virtual presentation allowed (~$600). Later rounds sometimes open."),
+    c("Watchlist", "Computing Conference 2027", "Computing Conference (SAI)", "15th",
+      "Springer LNNS", "Scopus", "London (virtual option in past editions)", "Outside India (hybrid)",
+      "8–9 Jul 2027", "2026-12-01", "Outside window", "15 Jan 2027", "31 Jan 2027", "Unconfirmed",
+      "Computing, AI", "", "", "https://saiconference.com/Computing",
+      "Round 2 deadline 1 Dec 2026; watch for a Round 3. Virtual option not yet confirmed for 2027."),
     # ---------- Premier India venues (more selective; listed for reference) ----------
     c("Premier", "CVMI 2027", "IEEE Intl. Conf. on Computer Vision and Machine Intelligence", "6th",
       "IEEE", "IEEE Xplore", "IIITDM Kancheepuram, Chennai, TN", "South",
@@ -271,6 +289,64 @@ CONFS = [
       "Computing, AI/ML, networking", "", "", "https://icccnt.com/", "No 2027 call yet. Large IEEE venue, hybrid in recent years."),
 ]
 
+# Verification: "Official site" (details read from the organizer's page), "Listing site" (aggregator/index only),
+# "Estimated" (no 2027 call yet; dates inferred from the last cycle).
+# Track record: where past editions actually appeared. Acceptance signals: whatever the series publishes.
+QUALITY = {
+ "ICETICS 2027": ("Official site", "1st edition (2026) is in IEEE Xplore (conf. #69505).", "Not published"),
+ "ICCCA 2027":   ("Official site", "In IEEE Xplore every year since 2015.", "2025: 2,278 submissions, 430 accepted (~19%), per organizer press release."),
+ "ICCMC 2027":   ("Official site", "Editions 2017–2025 in IEEE Xplore; 2027 record number not yet shown.", "Large volumes (1,000+ papers/yr in recent editions); not selective."),
+ "AIC 2027":     ("Official site", "SCRS series; earlier AIC editions in IEEE Xplore.", "Not published"),
+ "ICISS 2027":   ("Official site", "2025 (7th) proceedings published by IEEE (3 vols).", "Large 3-volume proceedings; not selective."),
+ "CICN 2027":    ("Official site", "In IEEE Xplore (CPS) since 2009.", "Not published"),
+ "PEIS 2027":    ("Official site", "2026 edition promised Springer LNEE; volume not yet seen.", "Not published"),
+ "BIDA 2027":    ("Official site", "SCRS series; prior BIDA editions in Springer.", "Not published"),
+ "CVR 2027":     ("Official site", "LNNS proceedings volumes exist for 2021–2025.", "Not published"),
+ "CIMA 2027":    ("Official site", "SCRS series; 2025 edition in Springer LNNS.", "Not published"),
+ "ICIVC 2027":   ("Official site", "SCRS series; prior ICIVC editions in Springer LNNS.", "Not published"),
+ "ICDWCI 2027":  ("Official site", "ICDWCI 2024 book published by Springer (IoT & Wireless Comm. Networks series); 2026 volume not yet seen.", "Not published"),
+ "ICDSA 2027":   ("Official site", "2025 edition: 7 LNNS volumes; 2024 went to SN Computer Science special issue instead.", "Not published"),
+ "CIS 2027":     ("Official site", "SCRS series; CIS 2021–2025 in Springer LNNS.", "Not published"),
+ "ICST 2027":    ("Listing site", "New series; no past edition found.", "Not published"),
+ "ICSISCET 2027":("Official site", "SCRS series; prior editions in Springer LNNS.", "Not published"),
+ "ICRTC 2027":   ("Official site", "Past publisher not verified.", "Not published"),
+ "ISC 2027":     ("Official site", "Past publisher not verified.", "Not published"),
+ "ICAN 2027":    ("Official site", "Past editions' publisher not verified; 2027 partner 'to be updated'.", "Not published"),
+ "ICETCI 2027":  ("Official site", "Organizer says 2025 and 2026 proceedings were with Springer; not independently verified.", "Not published"),
+ "ICAISS 2027":  ("Official site", "2025 (3rd) proceedings published by IEEE (3 vols).", "Large 3-volume proceedings; not selective."),
+ "CVMI 2027":    ("Official site", "IEEE Xplore 2022–2025 (IIIT Allahabad, NIT Rourkela).", "Not published; single-track, moderate volume."),
+ "CVIP 2027":    ("Estimated", "Springer CCIS/LNCS every year since 2016.", "Historically ~30–35% (organizer statements in past calls)."),
+ "PReMI 2027":   ("Estimated", "Springer LNCS since 2005; 2025: 154 papers in 2 volumes.", "Selective; LNCS-level review."),
+ "INDICON 2027": ("Estimated", "IEEE Xplore every year.", "Typically ~30–40%."),
+ "ICCCNT 2027":  ("Estimated", "IEEE Xplore every year since 2010.", "Not published; very large volume."),
+ "ICARC 2027":   ("Official site", "IEEE Xplore 2021–2026 (IEEE Sri Lanka Section).", "Not published"),
+}
+TOPIC_RE = __import__("re").compile(r"AI|ML|DL|CV|NLP|vision|learning|intelligen|data science|pattern", __import__("re").I)
+def fit_score(r):
+    s = 0
+    if TOPIC_RE.search(r["Topic area"]): s += 1
+    if __import__("re").search(r"power|wireless|broad|business|sustainab", r["Topic area"], __import__("re").I): s -= 1
+    if r["Mode"] == "Hybrid": s += 1
+    pub = r["Publisher / series"].lower()
+    if not any(w in pub for w in ("pending", "not confirmed", "not stated", "not announced", "planned", "proposal", "unconfirmed", "tbc")): s += 1
+    if r["Deadline status"].startswith("Confirmed"): s += 1
+    if r["Verification"] == "Official site" and "not verified" not in r["Track record"].lower() and "no past" not in r["Track record"].lower(): s += 1
+    return max(0, s)
+for r in CONFS:
+    if r["Acronym"] in QUALITY:
+        r["Verification"], r["Track record"], r["Acceptance signals"] = QUALITY[r["Acronym"]]
+    elif r["Deadline status"].startswith("Expected"):
+        r["Verification"] = "Estimated"
+    r["Fit score"] = fit_score(r)
+
+# One entry per refresh; newest first. The refresh task prepends to this list.
+CHANGELOG = [
+ ("2026-11-17", "Added fit score, verification tier, track record and acceptance columns; closing-soon section and change log on the page. Added ICARC 2027 (Sri Lanka, hybrid IEEE). Coverage now includes hybrid venues outside India."),
+ ("2026-11-17", "Window widened to Jan–Aug 2027. Added CIS, ICST, ICSISCET, ICRTC, ISC (moved in), ICISS, ICAISS, CICN; Premier group (CVMI, CVIP, PReMI, INDICON, ICCCNT); COEP CON and IEEE-GCON to watchlist."),
+ ("2026-11-16", "First refresh run: fees collected; CONECCT moved to watchlist (deadline 15 Dec 2026); ISC rescheduled to Sep; CVR Puducherry entry replaced by CIMA; added BIDA, ICIVC and several watchlist venues."),
+ ("2026-11-16", "Database created: 13 venues, Jan–Mar 2027 window."),
+]
+
 wb = Workbook(); wb.remove(wb.active)
 sheets = {"IEEE": "IEEE", "Springer": "Springer", "Premier": "Premier", "Publisher TBC": "Publisher TBC",
           "Hybrid only": None, "Watchlist": "Watchlist"}
@@ -284,7 +360,7 @@ for title, grp in sheets.items():
     for cell in ws[1]:
         cell.font = Font(bold=True, color="FFFFFF"); cell.fill = PatternFill("solid", fgColor="1F3A5F")
     for i, k in enumerate(COLS, 1):
-        ws.column_dimensions[get_column_letter(i)].width = 40 if k in ("Full name", "Notes", "Website") else 18
+        ws.column_dimensions[get_column_letter(i)].width = 40 if k in ("Full name", "Notes", "Website", "Track record", "Acceptance signals") else 18
     for row in ws.iter_rows(min_row=2):
         for cell in row:
             cell.alignment = Alignment(wrap_text=True, vertical="top")
@@ -294,6 +370,7 @@ for title, grp in sheets.items():
             w = csv.DictWriter(f, COLS); w.writeheader(); w.writerows(rows)
 wb.save("conferences_2027.xlsx")
 json.dump(CONFS, open("data.json", "w"), indent=1, ensure_ascii=False)
+json.dump(CHANGELOG, open("changelog.json", "w"), indent=1, ensure_ascii=False)
 print(len(CONFS), "rows written")
-html = open("template.html").read().replace("__DATA__", json.dumps(CONFS, ensure_ascii=False)).replace("__CHECKED__", CHECKED)
+html = open("template.html").read().replace("__DATA__", json.dumps(CONFS, ensure_ascii=False)).replace("__CHECKED__", CHECKED).replace("__CHANGELOG__", json.dumps(CHANGELOG, ensure_ascii=False))
 open("conferences_2027.html", "w").write(html)

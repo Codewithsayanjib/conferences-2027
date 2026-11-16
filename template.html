@@ -48,10 +48,26 @@ a{color:var(--accent)}
 .legend{font-size:13px;color:var(--muted);margin-top:28px;border-top:1px solid var(--line);padding-top:16px;max-width:75ch}
 @media (max-width:520px){.row{grid-template-columns:70px 1fr}.stub .d{font-size:20px}}
 .dl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}.dl a{font:500 13px var(--body);padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--accent);text-decoration:none}.dl a:hover,.dl a:focus-visible{border-color:var(--accent)}
+.soon{margin:0 0 20px;padding:12px 14px;border:1px solid var(--warn);border-radius:8px;background:var(--warn-bg)}
+.soon h2{font:600 13px var(--body);text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;color:var(--warn)}
+.soon ul{margin:0;padding-left:18px;font-size:14px}.soon li{margin:2px 0}
+.soon .none{font-size:14px;color:var(--muted)}
+.score{font:500 11px var(--mono);margin-top:6px;color:var(--muted)}
+.score b{color:var(--fg)}
+.chip.ver-official{background:var(--ok-bg);color:var(--ok)}.chip.ver-listing{background:var(--warn-bg);color:var(--warn)}.chip.ver-est{background:var(--chip);color:var(--muted)}
+.chip.due{background:var(--warn-bg);color:var(--warn);font-weight:500}
+.sort{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin:0 0 8px}
+.sort button{font:500 12px var(--body);padding:4px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.sort button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.log{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+.log h2{font:600 13px var(--body);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;color:var(--muted)}
+.log dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;max-width:80ch}
+.log dt{font-family:var(--mono);color:var(--muted);font-size:12px;text-transform:none;letter-spacing:0}
 </style>
 <div class="wrap">
   <h1>CS/AI Conferences, Jan–Aug 2027 Deadlines</h1>
   <p class="lede">India-based IEEE and Springer venues for AI, ML, DL, CV and NLP whose full-paper submission deadline falls between 1 January and 31 August 2027. Sorted by deadline. Hybrid venues are marked green. Data last checked: __CHECKED__; always confirm on the official site before submitting.</p>
+  <section class="soon" id="soon" aria-label="Closing soon"></section>
   <div class="dl" aria-label="Downloads"><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027.xlsx">Excel (all sheets) ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_ieee.csv">IEEE CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_springer.csv">Springer CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_premier.csv">Premier CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_publisher_tbc.csv">Publisher TBC CSV ↓</a><a href="https://codewithsayanjib.github.io/conferences-2027/conferences_2027_watchlist.csv">Watchlist CSV ↓</a></div>
   <div class="filters" role="group" aria-label="Filter">
     <button id="f-all" data-f="all" aria-pressed="true">All in window</button>
@@ -62,34 +78,51 @@ a{color:var(--accent)}
     <button id="f-hyb" data-f="hybrid" aria-pressed="false">Hybrid only</button>
     <button id="f-watch" data-f="Watchlist" aria-pressed="false">Watchlist</button>
   </div>
+  <div class="sort">Sort by <button id="s-dl" data-s="deadline" aria-pressed="true">Deadline</button><button id="s-fit" data-s="fit" aria-pressed="false">Fit score</button></div>
   <div class="count" id="count"></div>
   <div class="list" id="list"></div>
-  <p class="legend"><b>Premier</b> lists the more selective India venues (CVMI, CVIP, PReMI, INDICON, ICCCNT); several have no 2027 call yet, so their deadlines are expectations from the last cycle. <b>Watchlist</b> holds strong venues whose deadline sits just outside the window or isn't published yet; extensions often pull them in. <b>Publisher TBC</b> means the 2027 publisher isn't confirmed. "LNNS approval pending" is normal for SCRS events months ahead.</p>
+  <section class="log" aria-label="Change log"><h2>Change log</h2><dl id="log"></dl></section>
+  <p class="legend"><b>Fit score</b> (0–5) adds one point each for topic fit, hybrid mode, confirmed publisher, confirmed deadline and an official-site check with a verified track record; it loses a point when the venue's main scope is not CS/AI. <b>Verification</b>: <i>Official site</i> means the details were read from the organizer's page, <i>Listing site</i> from an index or aggregator only, <i>Estimated</i> from the last cycle. <b>Premier</b> lists the more selective India venues (CVMI, CVIP, PReMI, INDICON, ICCCNT); several have no 2027 call yet, so their deadlines are expectations from the last cycle. <b>Watchlist</b> holds strong venues whose deadline sits just outside the window or isn't published yet; extensions often pull them in. <b>Publisher TBC</b> means the 2027 publisher isn't confirmed. "LNNS approval pending" is normal for SCRS events months ahead.</p>
 </div>
 <script>
 const DATA = __DATA__;
+const CHANGELOG = __CHANGELOG__;
 const COLOR={IEEE:"var(--ieee)",Springer:"var(--spr)","Publisher TBC":"var(--tbc)",Premier:"var(--prem)",Watchlist:"var(--tbc)"};
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let filter="all";
+let filter="all",sortBy="deadline";
+try{sortBy=localStorage.getItem("cf-sort")||"deadline"}catch(e){}
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+const daysTo=dl=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(dl);if(!m)return null;return Math.round((new Date(+m[1],+m[2]-1,+m[3])-TODAY)/864e5)};
 try{filter=localStorage.getItem("cf-filter")||"all"}catch(e){}
 function render(){
   document.querySelectorAll(".filters button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===filter));
   let rows=DATA.filter(r=>filter==="all"?r.Group!=="Watchlist":filter==="hybrid"?r.Mode==="Hybrid"&&r.Group!=="Watchlist":r.Group===filter);
-  rows.sort((a,b)=>a["Submission deadline"].localeCompare(b["Submission deadline"]));
+  document.querySelectorAll(".sort button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===sortBy));
+  rows.sort((a,b)=>sortBy==="fit"?(b["Fit score"]-a["Fit score"])||a["Submission deadline"].localeCompare(b["Submission deadline"]):a["Submission deadline"].localeCompare(b["Submission deadline"]));
   document.getElementById("count").textContent=rows.length+" venue"+(rows.length===1?"":"s");
   document.getElementById("list").innerHTML=rows.map(r=>{
     const dl=r["Submission deadline"],m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(dl);
     const stub=m?`<span class="m">${MON[+m[2]-1]}</span><span class="d">${+m[3]}</span><span class="y">${m[1]}</span>`:`<span class="m">TBA</span>`;
-    const hyb=/hybrid/i.test(r.Mode),st=r["Deadline status"];
+    const hyb=/hybrid/i.test(r.Mode),st=r["Deadline status"],d=daysTo(dl);
+    const due=d===null?"":d<0?`<span class="chip">Deadline passed</span>`:d<=21?`<span class="chip due">Due in ${d} day${d===1?"":"s"}</span>`:`<span class="chip">In ${d} days</span>`;
+    const ver=r.Verification||"",vc=ver==="Official site"?"ver-official":ver==="Estimated"?"ver-est":"ver-listing";
     const f=(k,l)=>r[k]&&r[k]!=="Not listed"?`<div><dt>${l||k}</dt><dd>${esc(r[k])}</dd></div>`:"";
     return `<article class="row" style="--c:${COLOR[r.Group]}"><div class="stub" aria-label="Deadline ${esc(dl)}">${stub}</div><div class="main">
       <div class="top"><span class="acr">${esc(r.Acronym)}</span><span class="name">${esc(r.Edition!=="—"?r.Edition+" ":"")}${esc(r["Full name"])}</span></div>
-      <div class="chips"><span class="chip grp">${esc(r.Group)}</span><span class="chip ${hyb?"ok":"warn"}">${hyb?"Hybrid":"Mode: "+esc(r.Mode)}</span><span class="chip ${st==="Confirmed"?"ok":"warn"}">Deadline: ${esc(st)}</span><span class="chip">${esc(r.Location)}</span></div>
-      <dl>${f("Conference dates","Conference")}${f("Publisher / series","Publisher")}${f("Indexing")}${f("Topic area","Topics")}${f("Notification")}${f("Camera-ready")}${f("Page limit")}${f("Fee: student","Fee · student")}${f("Fee: non-IEEE / regular","Fee · non-IEEE / regular")}${f("Fee: online/hybrid","Fee · online / hybrid")}${!r["Fee: student"]&&!r["Fee: non-IEEE / regular"]?f("Reg. fee (approx.)","Fee"):""}</dl>
+      <div class="chips"><span class="chip grp">${esc(r.Group)}</span><span class="chip ${hyb?"ok":"warn"}">${hyb?"Hybrid":"Mode: "+esc(r.Mode)}</span><span class="chip ${st==="Confirmed"?"ok":"warn"}">Deadline: ${esc(st)}</span><span class="chip ${vc}">${esc(ver)}</span>${due}<span class="chip">${esc(r.Location)}</span></div>
+      <dl>${f("Conference dates","Conference")}${f("Publisher / series","Publisher")}${f("Indexing")}${f("Topic area","Topics")}${f("Notification")}${f("Camera-ready")}${f("Page limit")}${f("Track record")}${f("Acceptance signals","Acceptance")}${f("Fee: student","Fee · student")}${f("Fee: non-IEEE / regular","Fee · non-IEEE / regular")}${f("Fee: online/hybrid","Fee · online / hybrid")}${!r["Fee: student"]&&!r["Fee: non-IEEE / regular"]?f("Reg. fee (approx.)","Fee"):""}</dl>
+      <div class="score">Fit score <b>${r["Fit score"]}</b>/5</div>
       <div class="notes">${esc(r.Notes)} <a href="${esc(r.Website)}" target="_blank" rel="noopener">Official site ↗</a></div>
     </div></article>`}).join("");
 }
+function renderSoon(){
+  const soon=DATA.filter(r=>{const d=daysTo(r["Submission deadline"]);return d!==null&&d>=0&&d<=21}).sort((a,b)=>a["Submission deadline"].localeCompare(b["Submission deadline"]));
+  document.getElementById("soon").innerHTML=`<h2>Closing in the next 3 weeks</h2>`+(soon.length?`<ul>${soon.map(r=>{const d=daysTo(r["Submission deadline"]);return `<li><b>${esc(r.Acronym)}</b> · ${esc(r["Submission deadline"])} · ${d===0?"today":"in "+d+" day"+(d===1?"":"s")} · ${esc(r.Location)}${/hybrid/i.test(r.Mode)?" · hybrid":""}</li>`}).join("")}</ul>`:`<div class="none">Nothing in the database closes in the next 3 weeks.</div>`);
+}
+document.getElementById("log").innerHTML=CHANGELOG.map(([d,t])=>`<dt>${esc(d)}</dt><dd>${esc(t)}</dd>`).join("");
+renderSoon();
+document.querySelectorAll(".sort button").forEach(b=>b.addEventListener("click",()=>{sortBy=b.dataset.s;try{localStorage.setItem("cf-sort",sortBy)}catch(e){}render()}));
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;try{localStorage.setItem("cf-filter",filter)}catch(e){}render()}));
 render();
 </script>
