@@ -10,14 +10,14 @@ COLS = ["Group", "Acronym", "Full name", "Edition", "Publisher / series", "Index
         "Location", "Region", "Conference dates", "Submission deadline", "Deadline status",
         "Notification", "Camera-ready", "Mode", "Topic area", "Page limit",
         "Reg. fee (approx.)", "Fee: student", "Fee: non-IEEE / regular", "Fee: online/hybrid", "Website", "Checked on", "Notes",
-        "Verification", "Track record", "Acceptance signals", "Fit score"]
+        "Verification", "Track record", "Acceptance signals", "Fit score", "Min fee (₹)"]
 
 def c(group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr, mode, topic, pages, fee, url, notes,
       fee_student="Not listed", fee_regular="Not listed", fee_online="Not listed",
       verification="Listing site", track="Not checked", accept="Not published"):
     return dict(zip(COLS, [group, acr, name, ed, pub, idx, loc, reg, dates, dl, dls, notif, cr,
                            mode, topic, pages, fee, fee_student, fee_regular, fee_online, url, CHECKED, notes,
-                           verification, track, accept, 0]))
+                           verification, track, accept, 0, None]))
 
 CONFS = [
     # ---------- IEEE ----------
@@ -348,12 +348,63 @@ CONFS = [
       "IEEE (Bangalore Section)", "IEEE Xplore", "Bengaluru, KA", "South",
       "Jul 2028 (expected)", "Expected Dec 2027", "Expected (last-cycle pattern)", "", "", "Unconfirmed",
       "18 tracks incl. AI/ML", "", "", "https://ieee-conecct.org/", "2027 edition: deadline 15 Dec 2026."),
+    # ---------- Added 18 Nov 2026: affordable venues and COMSYS ----------
+    c("Springer", "COMSYS 2027", "Intl. Conf. on Frontiers in Computing and Systems", "8th",
+      "Springer LNNS", "Scopus", "Not confirmed (organized with COMSYS Educational Trust, Kolkata)", "Not listed",
+      "28–30 Jun 2027", "2027-02-01", "Confirmed", "15 Mar 2027", "Not listed (reg. by 30 Mar 2027)", "Unconfirmed",
+      "Computing, AI, CV, IoT", "Not listed", "Not listed",
+      "https://comsysconf.org/", "Strong Springer track record. 2027 co-organizers include The Alan Turing Institute and Linacre College, Oxford, so the venue may be outside India; check whether online presentation is allowed."),
+    c("IEEE", "ICIPTM 2027", "IEEE Intl. Conf. on Innovative Practices in Technology and Management", "7th",
+      "IEEE (Digital Library)", "IEEE Xplore (expected)", "Amity University, Noida, UP", "North",
+      "22–23 Feb 2027 (one page says 19–21 Feb)", "2027-01-11", "Confirmed", "Not listed", "5 Feb 2027", "Unconfirmed",
+      "Technology, computing, management", "Not listed", "₹6,000–7,000 student author",
+      "https://conferences.amity.edu/iciptm2027/", "Affordable. Site warns that paying does not guarantee Xplore inclusion.",
+      "₹6,000 non-IEEE / ₹7,000 IEEE, Indian student author", "Not listed", "Not listed"),
+    c("IEEE", "CICTS 2027", "IEEE Intl. Conf. on Computational Intelligence & Communication Technologies for Sustainability", "1st",
+      "IEEE (tech. co-sponsor: IEEE Hyderabad Section)", "IEEE Xplore (expected)", "BVRIT, Hyderabad, TS", "South",
+      "9–10 Jun 2027", "2027-01-10", "Confirmed", "Not listed", "26 Apr 2027", "Unconfirmed",
+      "Computational intelligence, communication", "Up to 8 pages (₹1,000 per extra page)", "₹8,000–9,000 non-IEEE",
+      "https://www.cicts.in/", "First edition, so no track record yet.",
+      "₹8,000 non-IEEE student (₹6,800 IEEE student)", "₹9,000 non-IEEE (₹7,500 IEEE)", "Not listed"),
+    c("Publisher TBC", "ADSSSC 2027", "Intl. Conf. on Advances in Data Science, Signal Processing and Smart Computing", "—",
+      "Not stated (in association with IEEE Kerala Section)", "Not confirmed", "Sahrdaya College, Kodakara, KL", "South",
+      "22–23 Oct 2027", "2027-03-15", "Confirmed", "Not listed", "Not listed", "Unconfirmed",
+      "Data science, smart computing", "Not listed", "₹6,000–8,000 student (indicative)",
+      "https://adsssc.sahrdaya.ac.in/", "Fees indicative; final fees announced before registration. Does not allow AI-generated content without human oversight.",
+      "₹6,000–8,000 non-IEEE student (indicative)", "Not listed", "Not listed"),
+    c("Publisher TBC", "ICASAC 2027", "Intl. Conf. on Advances in Soft Computing, AI and Cyber Security", "—",
+      "IEEE Hyderabad Section tech. co-sponsorship (approval under process)", "Not confirmed", "CMR Engineering College, Hyderabad, TS", "South",
+      "Not listed", "Not published", "Needs verification", "Not listed", "Not listed", "Unconfirmed",
+      "Soft computing, AI, cyber security", "Not listed", "Not listed",
+      "https://icasac.com/", "Site lists 25 Mar, 15 May, 10 Jun and 15 Jun 2027 without labels; one is likely the deadline."),
+    c("Springer", "ICLADIS 2027", "Intl. Conf. on Linear Algebra, Data Science and Intelligent Systems", "—",
+      "Springer book volume + Springer Nature journal", "Not confirmed", "ANJA College, Sivakasi, TN", "South",
+      "Not listed", "2027-02-10", "Confirmed", "Not listed", "Not listed (reg. by 28 Feb 2027)", "In-person",
+      "Mathematics for ML, data science", "Not listed", "₹1,500–2,000 + 18% GST",
+      "https://mathsevents.anjac.edu.in/icladis2027/", "Cheapest venue found. Mathematics department; suits ML-theory papers. Abstract due 10 Jan 2027. Fees from a listing site.",
+      "₹1,500 early / ₹2,000 regular + 18% GST", "₹1,500 early / ₹2,000 regular + 18% GST", "No online option"),
+    c("Watchlist", "CSNT 2027", "IEEE Intl. Conf. on Communication Systems & Network Technologies", "16th",
+      "IEEE CPS", "IEEE Xplore", "Khajuraho, MP", "Central",
+      "12–14 Mar 2027", "2026-11-20", "Outside window", "", "20 Jan 2027", "In-person",
+      "Communication, networks, computing", "", "₹4,000 student",
+      "https://csnt.in/", "Affordable (UG/PG student ₹4,000, PhD ₹4,500) but deadline 20 Nov 2026, before the window.",
+      "₹4,000 UG/PG, ₹4,500 PhD (Indian author)", "Not listed", "No online option"),
+    c("Watchlist", "ESCI 2027", "IEEE Intl. Conf. on Emerging Smart Computing & Informatics", "9th",
+      "IEEE", "IEEE Xplore", "AISSMS IOIT, Pune, MH", "West",
+      "3–5 Mar 2027", "2026-10-15", "Deadline passed", "", "", "Hybrid",
+      "Smart computing, AI", "", "₹5,000 student",
+      "https://aissmsioitesci.edu.in/", "Affordable and hybrid, but deadline passed. The 2026 edition extended its dates; watch for the same.",
+      "₹5,000 non-IEEE student (₹4,500 IEEE student)", "Not listed", "Not listed"),
 ]
 
 # Verification: "Official site" (details read from the organizer's page), "Listing site" (aggregator/index only),
 # "Estimated" (no 2027 call yet; dates inferred from the last cycle).
 # Track record: where past editions actually appeared. Acceptance signals: whatever the series publishes.
 QUALITY = {
+ "COMSYS 2027":  ("Official site", "Springer every year: AISC (2020), then LNNS; COMSYS 2022–2025 volumes published.", "Not published"),
+ "ICIPTM 2027":  ("Official site", "Earlier ICIPTM editions in IEEE Xplore.", "Not published"),
+ "CICTS 2027":   ("Official site", "New series; no past edition.", "Not published"),
+ "ICLADIS 2027": ("Listing site", "Past publisher not verified.", "Not published"),
  "ICETICS 2027": ("Official site", "1st edition (2026) is in IEEE Xplore (conf. #69505).", "Not published"),
  "ICCCA 2027":   ("Official site", "In IEEE Xplore every year since 2015.", "2025: 2,278 submissions, 430 accepted (~19%), per organizer press release."),
  "ICCMC 2027":   ("Official site", "Editions 2017–2025 in IEEE Xplore; 2027 record number not yet shown.", "Large volumes (1,000+ papers/yr in recent editions); not selective."),
@@ -393,15 +444,33 @@ def fit_score(r):
     if r["Deadline status"].startswith("Confirmed"): s += 1
     if r["Verification"] == "Official site" and "not verified" not in r["Track record"].lower() and "no past" not in r["Track record"].lower(): s += 1
     return max(0, s)
+def min_fee(r):
+    """Lowest rupee amount quoted in the student or regular fee, with GST added when quoted as extra."""
+    best = None
+    for k in ("Fee: student", "Fee: non-IEEE / regular", "Reg. fee (approx.)"):
+        t = r.get(k) or ""
+        # Ignore member-only rates: drop "(... IEEE ...)" / "(... member ...)" asides and "IEEE"-labelled figures.
+        t = __import__("re").sub(r"\([^)]*(IEEE|[Mm]ember)[^)]*\)", "", t)
+        t = __import__("re").sub(r"₹[\d,]+\s*(IEEE(?! *member)|for IEEE)[^,;]*", "", t)
+        t = t.replace("non-IEEE", "nonmember")
+        t = __import__("re").sub(r"/\s*₹[\d,]+ IEEE[^,;]*", "", t)
+        for m in __import__("re").finditer(r"₹\s?([\d,]+)", t):
+            v = int(m.group(1).replace(",", ""))
+            if v < 500: continue
+            if "+ GST" in t or "+ 18%" in t: v = round(v * 1.18)
+            best = v if best is None else min(best, v)
+    return best
 for r in CONFS:
     if r["Acronym"] in QUALITY:
         r["Verification"], r["Track record"], r["Acceptance signals"] = QUALITY[r["Acronym"]]
     elif r["Deadline status"].startswith("Expected"):
         r["Verification"] = "Estimated"
     r["Fit score"] = fit_score(r)
+    r["Min fee (₹)"] = min_fee(r)
 
 # One entry per refresh; newest first. The refresh task prepends to this list.
 CHANGELOG = [
+ ("2026-11-18", "Added affordable venues: ICLADIS (₹1,500–2,000), ICIPTM (₹6,000), CICTS, ADSSSC, ICASAC; added COMSYS 2027 (Springer LNNS, deadline 1 Feb). CSNT and ESCI added to watchlist (cheap but deadlines passed). New ≤ ₹7k filter, cheapest-first sort and a private status tracker."),
  ("2026-11-18", "Window widened to all of 2027. Added CEEE, ITI, CSCT (confirmed Sep–Oct deadlines) and 11 recurring venues with expected Sep–Dec deadlines (ICAIA, AIEI 2028, ICADCML 2028, iConCISE 2028, IEEE-IC4 2028, ICICC 2028, ICCIDS 2028, ICRCICN 2028, NEXAI 2028, INDIACom 2028, CONECCT 2028). ICAIC moved from watchlist to Springer."),
  ("2026-11-17", "Added fit score, verification tier, track record and acceptance columns; closing-soon section and change log on the page. Added ICARC 2027 (Sri Lanka, hybrid IEEE). Coverage now includes hybrid venues outside India."),
  ("2026-11-17", "Window widened to Jan–Aug 2027. Added CIS, ICST, ICSISCET, ICRTC, ISC (moved in), ICISS, ICAISS, CICN; Premier group (CVMI, CVIP, PReMI, INDICON, ICCCNT); COEP CON and IEEE-GCON to watchlist."),

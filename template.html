@@ -63,6 +63,14 @@ a{color:var(--accent)}
 .log h2{font:600 13px var(--body);text-transform:uppercase;letter-spacing:.06em;margin:0 0 8px;color:var(--muted)}
 .log dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;max-width:80ch}
 .log dt{font-family:var(--mono);color:var(--muted);font-size:12px;text-transform:none;letter-spacing:0}
+.mine{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.mine select{font:500 12px var(--body);padding:3px 6px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.mine select.st-targeting{border-color:var(--accent);color:var(--accent)}
+.mine select.st-submitted{border-color:var(--ok);color:var(--ok)}
+.row.has-status{box-shadow:inset 3px 0 0 var(--accent)}
+.chip.fee{background:var(--chip);color:var(--fg)}
+.chip.fee.cheap{background:var(--ok-bg);color:var(--ok);font-weight:500}
+.private{font-size:12px;color:var(--muted);margin:0 0 8px}
 </style>
 <div class="wrap">
   <h1>CS/AI Conferences, 2027 Deadlines</h1>
@@ -77,8 +85,12 @@ a{color:var(--accent)}
     <button id="f-tbc" data-f="Publisher TBC" aria-pressed="false">Publisher TBC</button>
     <button id="f-hyb" data-f="hybrid" aria-pressed="false">Hybrid only</button>
     <button id="f-watch" data-f="Watchlist" aria-pressed="false">Watchlist</button>
+    <button id="f-cheap" data-f="cheap" aria-pressed="false">≤ ₹7k fee</button>
+    <button id="f-target" data-f="targeting" aria-pressed="false">My targets</button>
+    <button id="f-sub" data-f="submitted" aria-pressed="false">Submitted</button>
   </div>
-  <div class="sort">Sort by <button id="s-dl" data-s="deadline" aria-pressed="true">Deadline</button><button id="s-fit" data-s="fit" aria-pressed="false">Fit score</button></div>
+  <div class="sort">Sort by <button id="s-dl" data-s="deadline" aria-pressed="true">Deadline</button><button id="s-fit" data-s="fit" aria-pressed="false">Fit score</button><button id="s-fee" data-s="fee" aria-pressed="false">Cheapest fee</button></div>
+  <p class="private">Your Targeting / Submitted marks are saved only in this browser on this device. Nobody else who opens the link sees them.</p>
   <div class="count" id="count"></div>
   <div class="list" id="list"></div>
   <section class="log" aria-label="Change log"><h2>Change log</h2><dl id="log"></dl></section>
@@ -90,29 +102,33 @@ const CHANGELOG = __CHANGELOG__;
 const COLOR={IEEE:"var(--ieee)",Springer:"var(--spr)","Publisher TBC":"var(--tbc)",Premier:"var(--prem)",Watchlist:"var(--tbc)"};
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let filter="all",sortBy="deadline";
+let filter="all",sortBy="deadline",STATUS={};
+try{STATUS=JSON.parse(localStorage.getItem("cf-status")||"{}")||{}}catch(e){STATUS={}}
+const saveStatus=()=>{try{localStorage.setItem("cf-status",JSON.stringify(STATUS))}catch(e){}};
 try{sortBy=localStorage.getItem("cf-sort")||"deadline"}catch(e){}
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
 const daysTo=dl=>{const m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(dl);if(!m)return null;return Math.round((new Date(+m[1],+m[2]-1,+m[3])-TODAY)/864e5)};
 try{filter=localStorage.getItem("cf-filter")||"all"}catch(e){}
 function render(){
   document.querySelectorAll(".filters button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===filter));
-  let rows=DATA.filter(r=>filter==="all"?r.Group!=="Watchlist":filter==="hybrid"?r.Mode==="Hybrid"&&r.Group!=="Watchlist":r.Group===filter);
+  let rows=DATA.filter(r=>filter==="all"?r.Group!=="Watchlist":filter==="hybrid"?r.Mode==="Hybrid"&&r.Group!=="Watchlist":filter==="cheap"?r["Min fee (₹)"]!=null&&r["Min fee (₹)"]<=7000:filter==="targeting"||filter==="submitted"?STATUS[r.Acronym]===filter:r.Group===filter);
   document.querySelectorAll(".sort button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===sortBy));
-  rows.sort((a,b)=>sortBy==="fit"?(b["Fit score"]-a["Fit score"])||a["Submission deadline"].localeCompare(b["Submission deadline"]):a["Submission deadline"].localeCompare(b["Submission deadline"]));
+  rows.sort((a,b)=>sortBy==="fee"?((a["Min fee (₹)"]??1e9)-(b["Min fee (₹)"]??1e9))||a["Submission deadline"].localeCompare(b["Submission deadline"]):sortBy==="fit"?(b["Fit score"]-a["Fit score"])||a["Submission deadline"].localeCompare(b["Submission deadline"]):a["Submission deadline"].localeCompare(b["Submission deadline"]));
   document.getElementById("count").textContent=rows.length+" venue"+(rows.length===1?"":"s");
   document.getElementById("list").innerHTML=rows.map(r=>{
     const dl=r["Submission deadline"],m=/^(\d{4})-(\d\d)-(\d\d)$/.exec(dl);
     const stub=m?`<span class="m">${MON[+m[2]-1]}</span><span class="d">${+m[3]}</span><span class="y">${m[1]}</span>`:`<span class="m">TBA</span>`;
     const hyb=/hybrid/i.test(r.Mode),st=r["Deadline status"],d=daysTo(dl);
     const due=d===null?"":d<0?`<span class="chip">Deadline passed</span>`:d<=21?`<span class="chip due">Due in ${d} day${d===1?"":"s"}</span>`:`<span class="chip">In ${d} days</span>`;
+    const fee=r["Min fee (₹)"],feeChip=fee!=null?`<span class="chip fee${fee<=7000?" cheap":""}">from ₹${fee.toLocaleString("en-IN")}</span>`:"";
+    const mine=STATUS[r.Acronym]||"";
     const ver=r.Verification||"",vc=ver==="Official site"?"ver-official":ver==="Estimated"?"ver-est":"ver-listing";
     const f=(k,l)=>r[k]&&r[k]!=="Not listed"?`<div><dt>${l||k}</dt><dd>${esc(r[k])}</dd></div>`:"";
-    return `<article class="row" style="--c:${COLOR[r.Group]}"><div class="stub" aria-label="Deadline ${esc(dl)}">${stub}</div><div class="main">
+    return `<article class="row${mine?" has-status":""}" style="--c:${COLOR[r.Group]}"><div class="stub" aria-label="Deadline ${esc(dl)}">${stub}</div><div class="main">
       <div class="top"><span class="acr">${esc(r.Acronym)}</span><span class="name">${esc(r.Edition!=="—"?r.Edition+" ":"")}${esc(r["Full name"])}</span></div>
-      <div class="chips"><span class="chip grp">${esc(r.Group)}</span><span class="chip ${hyb?"ok":"warn"}">${hyb?"Hybrid":"Mode: "+esc(r.Mode)}</span><span class="chip ${st==="Confirmed"?"ok":"warn"}">Deadline: ${esc(st)}</span><span class="chip ${vc}">${esc(ver)}</span>${due}<span class="chip">${esc(r.Location)}</span></div>
+      <div class="chips"><span class="chip grp">${esc(r.Group)}</span><span class="chip ${hyb?"ok":"warn"}">${hyb?"Hybrid":"Mode: "+esc(r.Mode)}</span><span class="chip ${st==="Confirmed"?"ok":"warn"}">Deadline: ${esc(st)}</span><span class="chip ${vc}">${esc(ver)}</span>${due}${feeChip}<span class="chip">${esc(r.Location)}</span></div>
       <dl>${f("Conference dates","Conference")}${f("Publisher / series","Publisher")}${f("Indexing")}${f("Topic area","Topics")}${f("Notification")}${f("Camera-ready")}${f("Page limit")}${f("Track record")}${f("Acceptance signals","Acceptance")}${f("Fee: student","Fee · student")}${f("Fee: non-IEEE / regular","Fee · non-IEEE / regular")}${f("Fee: online/hybrid","Fee · online / hybrid")}${!r["Fee: student"]&&!r["Fee: non-IEEE / regular"]?f("Reg. fee (approx.)","Fee"):""}</dl>
-      <div class="score">Fit score <b>${r["Fit score"]}</b>/5</div>
+      <div class="mine"><span class="score">Fit score <b>${r["Fit score"]}</b>/5</span><label for="st-${esc(r.Acronym).replace(/\W/g,"")}">My status</label><select id="st-${esc(r.Acronym).replace(/\W/g,"")}" data-acr="${esc(r.Acronym)}" class="${mine?"st-"+mine:""}"><option value=""${mine?"":" selected"}>—</option><option value="targeting"${mine==="targeting"?" selected":""}>Targeting</option><option value="submitted"${mine==="submitted"?" selected":""}>Submitted</option></select></div>
       <div class="notes">${esc(r.Notes)} <a href="${esc(r.Website)}" target="_blank" rel="noopener">Official site ↗</a></div>
     </div></article>`}).join("");
 }
@@ -120,6 +136,7 @@ function renderSoon(){
   const soon=DATA.filter(r=>{const d=daysTo(r["Submission deadline"]);return d!==null&&d>=0&&d<=21}).sort((a,b)=>a["Submission deadline"].localeCompare(b["Submission deadline"]));
   document.getElementById("soon").innerHTML=`<h2>Closing in the next 3 weeks</h2>`+(soon.length?`<ul>${soon.map(r=>{const d=daysTo(r["Submission deadline"]);return `<li><b>${esc(r.Acronym)}</b> · ${esc(r["Submission deadline"])} · ${d===0?"today":"in "+d+" day"+(d===1?"":"s")} · ${esc(r.Location)}${/hybrid/i.test(r.Mode)?" · hybrid":""}</li>`}).join("")}</ul>`:`<div class="none">Nothing in the database closes in the next 3 weeks.</div>`);
 }
+document.getElementById("list").addEventListener("change",e=>{const s=e.target.closest("select[data-acr]");if(!s)return;if(s.value)STATUS[s.dataset.acr]=s.value;else delete STATUS[s.dataset.acr];saveStatus();render()});
 document.getElementById("log").innerHTML=CHANGELOG.map(([d,t])=>`<dt>${esc(d)}</dt><dd>${esc(t)}</dd>`).join("");
 renderSoon();
 document.querySelectorAll(".sort button").forEach(b=>b.addEventListener("click",()=>{sortBy=b.dataset.s;try{localStorage.setItem("cf-sort",sortBy)}catch(e){}render()}));

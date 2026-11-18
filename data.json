@@ -26,7 +26,8 @@
   "Verification": "Official site",
   "Track record": "1st edition (2026) is in IEEE Xplore (conf. #69505).",
   "Acceptance signals": "Not published",
-  "Fit score": 5
+  "Fit score": 5,
+  "Min fee (₹)": 5310
  },
  {
   "Group": "IEEE",
@@ -55,7 +56,8 @@
   "Verification": "Official site",
   "Track record": "In IEEE Xplore every year since 2015.",
   "Acceptance signals": "2025: 2,278 submissions, 430 accepted (~19%), per organizer press release.",
-  "Fit score": 5
+  "Fit score": 5,
+  "Min fee (₹)": 7080
  },
  {
   "Group": "IEEE",
@@ -84,7 +86,8 @@
   "Verification": "Official site",
   "Track record": "Editions 2017–2025 in IEEE Xplore; 2027 record number not yet shown.",
   "Acceptance signals": "Large volumes (1,000+ papers/yr in recent editions); not selective.",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -113,7 +116,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; earlier AIC editions in IEEE Xplore.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 14160
  },
  {
   "Group": "Springer",
@@ -142,7 +146,8 @@
   "Verification": "Official site",
   "Track record": "2026 edition promised Springer LNEE; volume not yet seen.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -171,7 +176,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; prior BIDA editions in Springer.",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Springer",
@@ -200,7 +206,8 @@
   "Verification": "Official site",
   "Track record": "LNNS proceedings volumes exist for 2021–2025.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Springer",
@@ -229,7 +236,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; 2025 edition in Springer LNNS.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Springer",
@@ -258,7 +266,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; prior ICIVC editions in Springer LNNS.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Springer",
@@ -287,7 +296,8 @@
   "Verification": "Official site",
   "Track record": "ICDWCI 2024 book published by Springer (IoT & Wireless Comm. Networks series); 2026 volume not yet seen.",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": 4000
  },
  {
   "Group": "Springer",
@@ -316,7 +326,8 @@
   "Verification": "Official site",
   "Track record": "2025 edition: 7 LNNS volumes; 2024 went to SN Computer Science special issue instead.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Publisher TBC",
@@ -345,7 +356,8 @@
   "Verification": "Official site",
   "Track record": "Past editions' publisher not verified; 2027 partner 'to be updated'.",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": 9000
  },
  {
   "Group": "Publisher TBC",
@@ -374,7 +386,8 @@
   "Verification": "Official site",
   "Track record": "Organizer says 2025 and 2026 proceedings were with Springer; not independently verified.",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": 11000
  },
  {
   "Group": "Watchlist",
@@ -403,7 +416,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": 7500
  },
  {
   "Group": "Watchlist",
@@ -432,7 +446,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": 10620
  },
  {
   "Group": "Watchlist",
@@ -461,7 +476,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": 8500
  },
  {
   "Group": "Watchlist",
@@ -490,7 +506,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -519,7 +536,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": 8000
  },
  {
   "Group": "Watchlist",
@@ -548,7 +566,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -577,7 +596,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -606,7 +626,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Publisher TBC",
@@ -635,7 +656,8 @@
   "Verification": "Official site",
   "Track record": "Past publisher not verified.",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -664,7 +686,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; CIS 2021–2025 in Springer LNNS.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "Publisher TBC",
@@ -693,7 +716,8 @@
   "Verification": "Listing site",
   "Track record": "New series; no past edition found.",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Publisher TBC",
@@ -722,7 +746,8 @@
   "Verification": "Official site",
   "Track record": "SCRS series; prior editions in Springer LNNS.",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -751,7 +776,8 @@
   "Verification": "Official site",
   "Track record": "Past publisher not verified.",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": null
  },
  {
   "Group": "Premier",
@@ -780,7 +806,8 @@
   "Verification": "Estimated",
   "Track record": "Springer CCIS/LNCS every year since 2016.",
   "Acceptance signals": "Historically ~30–35% (organizer statements in past calls).",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Premier",
@@ -809,7 +836,8 @@
   "Verification": "Estimated",
   "Track record": "IEEE Xplore every year.",
   "Acceptance signals": "Typically ~30–40%.",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -838,7 +866,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -867,7 +896,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -896,7 +926,8 @@
   "Verification": "Official site",
   "Track record": "2025 (7th) proceedings published by IEEE (3 vols).",
   "Acceptance signals": "Large 3-volume proceedings; not selective.",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "Publisher TBC",
@@ -925,7 +956,8 @@
   "Verification": "Official site",
   "Track record": "2025 (3rd) proceedings published by IEEE (3 vols).",
   "Acceptance signals": "Large 3-volume proceedings; not selective.",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -954,7 +986,8 @@
   "Verification": "Official site",
   "Track record": "In IEEE Xplore (CPS) since 2009.",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -983,7 +1016,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -1012,7 +1046,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1041,7 +1076,8 @@
   "Verification": "Official site",
   "Track record": "IEEE Xplore 2021–2026 (IEEE Sri Lanka Section).",
   "Acceptance signals": "Not published",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -1070,7 +1106,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "Watchlist",
@@ -1099,7 +1136,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Premier",
@@ -1128,7 +1166,8 @@
   "Verification": "Official site",
   "Track record": "IEEE Xplore 2022–2025 (IIIT Allahabad, NIT Rourkela).",
   "Acceptance signals": "Not published; single-track, moderate volume.",
-  "Fit score": 4
+  "Fit score": 4,
+  "Min fee (₹)": 11800
  },
  {
   "Group": "Premier",
@@ -1157,7 +1196,8 @@
   "Verification": "Estimated",
   "Track record": "Springer LNCS since 2005; 2025: 154 papers in 2 volumes.",
   "Acceptance signals": "Selective; LNCS-level review.",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Premier",
@@ -1186,7 +1226,8 @@
   "Verification": "Estimated",
   "Track record": "IEEE Xplore every year since 2010.",
   "Acceptance signals": "Not published; very large volume.",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1215,7 +1256,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 1
+  "Fit score": 1,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -1244,7 +1286,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "Publisher TBC",
@@ -1273,7 +1316,8 @@
   "Verification": "Listing site",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1302,7 +1346,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1331,7 +1376,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -1360,7 +1406,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1389,7 +1436,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1418,7 +1466,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -1447,7 +1496,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1476,7 +1526,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1505,7 +1556,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "Springer",
@@ -1534,7 +1586,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 3
+  "Fit score": 3,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1563,7 +1616,8 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
  },
  {
   "Group": "IEEE",
@@ -1592,6 +1646,247 @@
   "Verification": "Estimated",
   "Track record": "Not checked",
   "Acceptance signals": "Not published",
-  "Fit score": 2
+  "Fit score": 2,
+  "Min fee (₹)": null
+ },
+ {
+  "Group": "Springer",
+  "Acronym": "COMSYS 2027",
+  "Full name": "Intl. Conf. on Frontiers in Computing and Systems",
+  "Edition": "8th",
+  "Publisher / series": "Springer LNNS",
+  "Indexing": "Scopus",
+  "Location": "Not confirmed (organized with COMSYS Educational Trust, Kolkata)",
+  "Region": "Not listed",
+  "Conference dates": "28–30 Jun 2027",
+  "Submission deadline": "2027-02-01",
+  "Deadline status": "Confirmed",
+  "Notification": "15 Mar 2027",
+  "Camera-ready": "Not listed (reg. by 30 Mar 2027)",
+  "Mode": "Unconfirmed",
+  "Topic area": "Computing, AI, CV, IoT",
+  "Page limit": "Not listed",
+  "Reg. fee (approx.)": "Not listed",
+  "Fee: student": "Not listed",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://comsysconf.org/",
+  "Checked on": "2026-11-18",
+  "Notes": "Strong Springer track record. 2027 co-organizers include The Alan Turing Institute and Linacre College, Oxford, so the venue may be outside India; check whether online presentation is allowed.",
+  "Verification": "Official site",
+  "Track record": "Springer every year: AISC (2020), then LNNS; COMSYS 2022–2025 volumes published.",
+  "Acceptance signals": "Not published",
+  "Fit score": 4,
+  "Min fee (₹)": null
+ },
+ {
+  "Group": "IEEE",
+  "Acronym": "ICIPTM 2027",
+  "Full name": "IEEE Intl. Conf. on Innovative Practices in Technology and Management",
+  "Edition": "7th",
+  "Publisher / series": "IEEE (Digital Library)",
+  "Indexing": "IEEE Xplore (expected)",
+  "Location": "Amity University, Noida, UP",
+  "Region": "North",
+  "Conference dates": "22–23 Feb 2027 (one page says 19–21 Feb)",
+  "Submission deadline": "2027-01-11",
+  "Deadline status": "Confirmed",
+  "Notification": "Not listed",
+  "Camera-ready": "5 Feb 2027",
+  "Mode": "Unconfirmed",
+  "Topic area": "Technology, computing, management",
+  "Page limit": "Not listed",
+  "Reg. fee (approx.)": "₹6,000–7,000 student author",
+  "Fee: student": "₹6,000 non-IEEE / ₹7,000 IEEE, Indian student author",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://conferences.amity.edu/iciptm2027/",
+  "Checked on": "2026-11-18",
+  "Notes": "Affordable. Site warns that paying does not guarantee Xplore inclusion.",
+  "Verification": "Official site",
+  "Track record": "Earlier ICIPTM editions in IEEE Xplore.",
+  "Acceptance signals": "Not published",
+  "Fit score": 3,
+  "Min fee (₹)": 6000
+ },
+ {
+  "Group": "IEEE",
+  "Acronym": "CICTS 2027",
+  "Full name": "IEEE Intl. Conf. on Computational Intelligence & Communication Technologies for Sustainability",
+  "Edition": "1st",
+  "Publisher / series": "IEEE (tech. co-sponsor: IEEE Hyderabad Section)",
+  "Indexing": "IEEE Xplore (expected)",
+  "Location": "BVRIT, Hyderabad, TS",
+  "Region": "South",
+  "Conference dates": "9–10 Jun 2027",
+  "Submission deadline": "2027-01-10",
+  "Deadline status": "Confirmed",
+  "Notification": "Not listed",
+  "Camera-ready": "26 Apr 2027",
+  "Mode": "Unconfirmed",
+  "Topic area": "Computational intelligence, communication",
+  "Page limit": "Up to 8 pages (₹1,000 per extra page)",
+  "Reg. fee (approx.)": "₹8,000–9,000 non-IEEE",
+  "Fee: student": "₹8,000 non-IEEE student (₹6,800 IEEE student)",
+  "Fee: non-IEEE / regular": "₹9,000 non-IEEE (₹7,500 IEEE)",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://www.cicts.in/",
+  "Checked on": "2026-11-18",
+  "Notes": "First edition, so no track record yet.",
+  "Verification": "Official site",
+  "Track record": "New series; no past edition.",
+  "Acceptance signals": "Not published",
+  "Fit score": 3,
+  "Min fee (₹)": 8000
+ },
+ {
+  "Group": "Publisher TBC",
+  "Acronym": "ADSSSC 2027",
+  "Full name": "Intl. Conf. on Advances in Data Science, Signal Processing and Smart Computing",
+  "Edition": "—",
+  "Publisher / series": "Not stated (in association with IEEE Kerala Section)",
+  "Indexing": "Not confirmed",
+  "Location": "Sahrdaya College, Kodakara, KL",
+  "Region": "South",
+  "Conference dates": "22–23 Oct 2027",
+  "Submission deadline": "2027-03-15",
+  "Deadline status": "Confirmed",
+  "Notification": "Not listed",
+  "Camera-ready": "Not listed",
+  "Mode": "Unconfirmed",
+  "Topic area": "Data science, smart computing",
+  "Page limit": "Not listed",
+  "Reg. fee (approx.)": "₹6,000–8,000 student (indicative)",
+  "Fee: student": "₹6,000–8,000 non-IEEE student (indicative)",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://adsssc.sahrdaya.ac.in/",
+  "Checked on": "2026-11-18",
+  "Notes": "Fees indicative; final fees announced before registration. Does not allow AI-generated content without human oversight.",
+  "Verification": "Listing site",
+  "Track record": "Not checked",
+  "Acceptance signals": "Not published",
+  "Fit score": 2,
+  "Min fee (₹)": 6000
+ },
+ {
+  "Group": "Publisher TBC",
+  "Acronym": "ICASAC 2027",
+  "Full name": "Intl. Conf. on Advances in Soft Computing, AI and Cyber Security",
+  "Edition": "—",
+  "Publisher / series": "IEEE Hyderabad Section tech. co-sponsorship (approval under process)",
+  "Indexing": "Not confirmed",
+  "Location": "CMR Engineering College, Hyderabad, TS",
+  "Region": "South",
+  "Conference dates": "Not listed",
+  "Submission deadline": "Not published",
+  "Deadline status": "Needs verification",
+  "Notification": "Not listed",
+  "Camera-ready": "Not listed",
+  "Mode": "Unconfirmed",
+  "Topic area": "Soft computing, AI, cyber security",
+  "Page limit": "Not listed",
+  "Reg. fee (approx.)": "Not listed",
+  "Fee: student": "Not listed",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://icasac.com/",
+  "Checked on": "2026-11-18",
+  "Notes": "Site lists 25 Mar, 15 May, 10 Jun and 15 Jun 2027 without labels; one is likely the deadline.",
+  "Verification": "Listing site",
+  "Track record": "Not checked",
+  "Acceptance signals": "Not published",
+  "Fit score": 2,
+  "Min fee (₹)": null
+ },
+ {
+  "Group": "Springer",
+  "Acronym": "ICLADIS 2027",
+  "Full name": "Intl. Conf. on Linear Algebra, Data Science and Intelligent Systems",
+  "Edition": "—",
+  "Publisher / series": "Springer book volume + Springer Nature journal",
+  "Indexing": "Not confirmed",
+  "Location": "ANJA College, Sivakasi, TN",
+  "Region": "South",
+  "Conference dates": "Not listed",
+  "Submission deadline": "2027-02-10",
+  "Deadline status": "Confirmed",
+  "Notification": "Not listed",
+  "Camera-ready": "Not listed (reg. by 28 Feb 2027)",
+  "Mode": "In-person",
+  "Topic area": "Mathematics for ML, data science",
+  "Page limit": "Not listed",
+  "Reg. fee (approx.)": "₹1,500–2,000 + 18% GST",
+  "Fee: student": "₹1,500 early / ₹2,000 regular + 18% GST",
+  "Fee: non-IEEE / regular": "₹1,500 early / ₹2,000 regular + 18% GST",
+  "Fee: online/hybrid": "No online option",
+  "Website": "https://mathsevents.anjac.edu.in/icladis2027/",
+  "Checked on": "2026-11-18",
+  "Notes": "Cheapest venue found. Mathematics department; suits ML-theory papers. Abstract due 10 Jan 2027. Fees from a listing site.",
+  "Verification": "Listing site",
+  "Track record": "Past publisher not verified.",
+  "Acceptance signals": "Not published",
+  "Fit score": 3,
+  "Min fee (₹)": 1770
+ },
+ {
+  "Group": "Watchlist",
+  "Acronym": "CSNT 2027",
+  "Full name": "IEEE Intl. Conf. on Communication Systems & Network Technologies",
+  "Edition": "16th",
+  "Publisher / series": "IEEE CPS",
+  "Indexing": "IEEE Xplore",
+  "Location": "Khajuraho, MP",
+  "Region": "Central",
+  "Conference dates": "12–14 Mar 2027",
+  "Submission deadline": "2026-11-20",
+  "Deadline status": "Outside window",
+  "Notification": "",
+  "Camera-ready": "20 Jan 2027",
+  "Mode": "In-person",
+  "Topic area": "Communication, networks, computing",
+  "Page limit": "",
+  "Reg. fee (approx.)": "₹4,000 student",
+  "Fee: student": "₹4,000 UG/PG, ₹4,500 PhD (Indian author)",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "No online option",
+  "Website": "https://csnt.in/",
+  "Checked on": "2026-11-18",
+  "Notes": "Affordable (UG/PG student ₹4,000, PhD ₹4,500) but deadline 20 Nov 2026, before the window.",
+  "Verification": "Listing site",
+  "Track record": "Not checked",
+  "Acceptance signals": "Not published",
+  "Fit score": 1,
+  "Min fee (₹)": 4000
+ },
+ {
+  "Group": "Watchlist",
+  "Acronym": "ESCI 2027",
+  "Full name": "IEEE Intl. Conf. on Emerging Smart Computing & Informatics",
+  "Edition": "9th",
+  "Publisher / series": "IEEE",
+  "Indexing": "IEEE Xplore",
+  "Location": "AISSMS IOIT, Pune, MH",
+  "Region": "West",
+  "Conference dates": "3–5 Mar 2027",
+  "Submission deadline": "2026-10-15",
+  "Deadline status": "Deadline passed",
+  "Notification": "",
+  "Camera-ready": "",
+  "Mode": "Hybrid",
+  "Topic area": "Smart computing, AI",
+  "Page limit": "",
+  "Reg. fee (approx.)": "₹5,000 student",
+  "Fee: student": "₹5,000 non-IEEE student (₹4,500 IEEE student)",
+  "Fee: non-IEEE / regular": "Not listed",
+  "Fee: online/hybrid": "Not listed",
+  "Website": "https://aissmsioitesci.edu.in/",
+  "Checked on": "2026-11-18",
+  "Notes": "Affordable and hybrid, but deadline passed. The 2026 edition extended its dates; watch for the same.",
+  "Verification": "Listing site",
+  "Track record": "Not checked",
+  "Acceptance signals": "Not published",
+  "Fit score": 3,
+  "Min fee (₹)": 5000
  }
 ]
