@@ -5,7 +5,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
-CHECKED = "2026-11-18"
+CHECKED = "2026-11-20"
 COLS = ["Group", "Acronym", "Full name", "Edition", "Publisher / series", "Indexing",
         "Location", "Region", "Conference dates", "Submission deadline", "Deadline status",
         "Notification", "Camera-ready", "Mode", "Topic area", "Page limit",
@@ -395,12 +395,19 @@ CONFS = [
       "Smart computing, AI", "", "₹5,000 student",
       "https://aissmsioitesci.edu.in/", "Affordable and hybrid, but deadline passed. The 2026 edition extended its dates; watch for the same.",
       "₹5,000 non-IEEE student (₹4,500 IEEE student)", "Not listed", "Not listed"),
+    c("IEEE", "ICSFT 2027", "IEEE Intl. Conf. on Sustainable and Futuristic Technologies", "2nd",
+      "IEEE (IEEE Pune Section)", "IEEE Xplore", "MMCOE, Karvenagar, Pune, MH", "West",
+      "24–25 Apr 2027", "2027-01-07", "Confirmed", "Not listed", "Not listed", "Hybrid",
+      "AI & data science track; responsible/green AI; also non-CS tracks", "Not listed", "₹7,080–8,260 incl. GST",
+      "https://cmt3.research.microsoft.com/ICSFT2027", "Marathwada Mitra Mandal's College of Engineering. Submissions open 7 Nov 2026 on CMT. Fee includes kit, breakfast, lunch and cultural event. Details from the official brochure shared by the user.",
+      "₹7,080 non-IEEE student (₹5,310 IEEE student), incl. 18% GST", "₹8,260 non-IEEE (₹6,490 IEEE member), incl. 18% GST", "Same fee for online or offline (hybrid)"),
 ]
 
 # Verification: "Official site" (details read from the organizer's page), "Listing site" (aggregator/index only),
 # "Estimated" (no 2027 call yet; dates inferred from the last cycle).
 # Track record: where past editions actually appeared. Acceptance signals: whatever the series publishes.
 QUALITY = {
+ "ICSFT 2027":   ("Official site", "2nd edition; 1st edition (2026) proceedings not yet verified in IEEE Xplore.", "Not published"),
  "COMSYS 2027":  ("Official site", "Springer every year: AISC (2020), then LNNS; COMSYS 2022–2025 volumes published.", "Not published"),
  "ICIPTM 2027":  ("Official site", "Earlier ICIPTM editions in IEEE Xplore.", "Not published"),
  "CICTS 2027":   ("Official site", "New series; no past edition.", "Not published"),
@@ -470,6 +477,7 @@ for r in CONFS:
 
 # One entry per refresh; newest first. The refresh task prepends to this list.
 CHANGELOG = [
+ ("2026-11-20", "Added ICSFT 2027 (IEEE Pune Section, MMCOE Pune, hybrid, deadline 7 Jan 2027, non-IEEE student ₹7,080 incl. GST)."),
  ("2026-11-18", "Added affordable venues: ICLADIS (₹1,500–2,000), ICIPTM (₹6,000), CICTS, ADSSSC, ICASAC; added COMSYS 2027 (Springer LNNS, deadline 1 Feb). CSNT and ESCI added to watchlist (cheap but deadlines passed). New ≤ ₹7k filter, cheapest-first sort and a private status tracker."),
  ("2026-11-18", "Window widened to all of 2027. Added CEEE, ITI, CSCT (confirmed Sep–Oct deadlines) and 11 recurring venues with expected Sep–Dec deadlines (ICAIA, AIEI 2028, ICADCML 2028, iConCISE 2028, IEEE-IC4 2028, ICICC 2028, ICCIDS 2028, ICRCICN 2028, NEXAI 2028, INDIACom 2028, CONECCT 2028). ICAIC moved from watchlist to Springer."),
  ("2026-11-17", "Added fit score, verification tier, track record and acceptance columns; closing-soon section and change log on the page. Added ICARC 2027 (Sri Lanka, hybrid IEEE). Coverage now includes hybrid venues outside India."),
